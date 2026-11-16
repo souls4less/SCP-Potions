@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GPL-3.0-only"
+
+[[mods]]
+modId="scp_potions"
+version="${file.jarVersion}"
+displayName="SCP Potions"
+logoFile="logo.png"
+authors="Souls4Less"
+credits="ZCoper and the SCP Wiki authors (see ATTRIBUTION.md)"
+description='''A small mod that adds potion brewing recipes for some of ZCoper's SCP mods. Supported SCP mods are optional. Some ingredients can be collected by crouch-right-clicking an SCP with a glass bottle.'''
+
+[[dependencies.scp_potions]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.scp_potions]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"

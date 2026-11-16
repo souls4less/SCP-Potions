@@ -1,0 +1,11 @@
+// ForgeGradle 6 is published through MinecraftForge's Maven repository.
+// Gradle only searches the Gradle Plugin Portal unless this is declared.
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.minecraftforge.net/' }
+    }
+}
+
+// Gradle rejects the temporary build directory name '.forge-build'.
+rootProject.name = 'scp_potions'

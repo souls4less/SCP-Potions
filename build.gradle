@@ -1,0 +1,60 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+version = mod_version
+group = mod_group_id
+base { archivesName = mod_id }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+    copyIdeResources = true
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                scp_potions { source sourceSets.main }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                scp_potions { source sourceSets.main }
+            }
+        }
+    }
+}
+
+repositories {
+    // JEI API is needed only to compile the optional client-side recipe viewer.
+    maven { name = 'BlameJared'; url = 'https://maven.blamejared.com/' }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('jar', Jar).configure {
+    manifest.attributes([
+        'Specification-Title': 'scp_potions',
+        'Specification-Vendor': 'Souls4Less',
+        'Specification-Version': '1',
+        'Implementation-Title': 'scp_potions',
+        'Implementation-Version': project.version,
+        'Implementation-Vendor': 'Souls4Less'
+    ])
+    finalizedBy 'reobfJar'
+}
